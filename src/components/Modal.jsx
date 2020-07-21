@@ -7,10 +7,10 @@ const ModalComponent = ({
   modalState,
   setModalState,
   modalSelectedMovie={},
-  className
+  
   }) => {
     const toggle = () => setModalState(!modalState);
- 
+    
     return (
         <div>
         <Modal 
@@ -20,7 +20,8 @@ const ModalComponent = ({
           <ModalHeader toggle={toggle}>{modalSelectedMovie.title ? modalSelectedMovie.title : modalSelectedMovie.name }</ModalHeader>
           <ModalBody>
             <MovieImage 
-            movieImageUrl={modalSelectedMovie.backdrop_path}
+            movieImageUrl={modalSelectedMovie.backdrop_path }
+
             width={'100%'}
             />
             {modalSelectedMovie.overview}

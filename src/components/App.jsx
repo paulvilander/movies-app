@@ -3,6 +3,7 @@ import Header from './Header';
 import Movie from './Movie';
 import API_KEY from '../api-config';
 import ModalComponent from './Modal';
+import Search from './Search';
 
 
 const dataFetcher = async (url, setMovieArr) => {
@@ -15,7 +16,7 @@ const dataFetcher = async (url, setMovieArr) => {
 };
 
 function App() {
-  const trendingMovisUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
+  const trendingMovisUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
 
   const [movieArr, setMovieArr] = useState([]);
   const [modalSelectedMovie, setModalSelectedMovie] = useState();
@@ -25,11 +26,15 @@ function App() {
     dataFetcher(trendingMovisUrl, setMovieArr);
   },[trendingMovisUrl])
 
- 
+  const searchHandler = searchValue => {
+   const searchMovieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchValue}`;
+   dataFetcher(searchMovieUrl,setMovieArr);
+ }
 
   return ( 
   <div className="App">
     <Header title={"Movie SA"}/>
+      <Search searchHandler= {searchHandler}/>
     <div className="movie-grid-container">
     {movieArr.length > 0
      ? movieArr.map((itemMovie, index) => {
